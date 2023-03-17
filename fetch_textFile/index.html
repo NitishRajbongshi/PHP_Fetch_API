@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Text File</title>
+</head>
+<body>
+    <div>
+        <button id="send">Send Response</button>
+        <p id="response">Response will visible here...</p>
+    </div>
+
+    <script>
+        const btn = document.getElementById("send");
+        btn.addEventListener("click", send_request);
+
+        function send_request() {
+            // sent a request using the fetch api
+
+            // fetch api send a promise which can be handle using the .then
+            // In the first .then the response is handle and return the text given by the response
+            // In the second .then the function is used to display the text data
+            fetch("content.txt")
+            .then(res => res.text())
+            .then((text) => {
+                document.getElementById("response").innerHTML = text;
+            })
+            .catch((err) => {
+                document.getElementById("response").innerHTML = err;
+            })
+        }
+    </script>
+</body>
+</html>
