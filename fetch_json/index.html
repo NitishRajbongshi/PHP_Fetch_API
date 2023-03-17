@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Text File</title>
+</head>
+<body>
+    <div>
+        <button id="send">Send Response</button>
+        <p id="response">Response will visible here...</p>
+    </div>
+
+    <script>
+        const btn = document.getElementById("send");
+        btn.addEventListener("click", send_request);
+
+        function send_request() {
+            fetch("content.json")
+            .then((res) => res.json())
+            .then((data) => {
+                console.log(data);
+                output = `<h3>Response</h3>`;
+                data.forEach(item => {
+                    output += `
+                    <ul>
+                        <li>${item.name}</li>    
+                        <li>${item.email}</li>    
+                    </ul>
+                    `;
+                });
+                document.getElementById("response").innerHTML = output
+            })
+            .catch((err) => console.log(err));
+        }
+    </script>
+</body>
+</html>
